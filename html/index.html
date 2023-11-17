@@ -1,14 +1,5 @@
 <!DOCTYPE html>
-<?php
-  session_start(); // 세션 시작
 
-  // 사용자가 로그인되어 있는지 확인
-  if (!isset($_SESSION['userid'])) {
-      // 로그인되어 있지 않다면 로그인 페이지로 리다이렉트
-      header("Location: auth-login-basic.php");
-      exit();
-  }
-?>
 <!-- beautify ignore:start -->
 <html
   lang="en"
@@ -24,11 +15,13 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
+
     <title>Database Team 2</title>
-    <meta name="description" content="홍익대학교 2023년 DATABASE 강의 2조 프로젝트 입니다." />
+
+    <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/1437b234-02cc-4109-9c9d-ed9a0155c5b1" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -46,6 +39,17 @@
     <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/css/demo.css" />
 
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../assets/js/config.js"></script>
   </head>
 
   <body>
@@ -57,17 +61,18 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.php" class="app-brand-link">
-              <img src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/eae17f03-cab2-4615-9917-b2709521b6cd" alt class="w-px-40 h-auto " />
+            <a href="index.html" class="app-brand-link">
+              <img src="../assets/img/avatars/hongik.jpg" alt class="w-px-40 h-auto " />
               <span class="app-brand-text demo menu-text fw-bolder ms-2">TEAM 2</span>
             </a>
           </div>
+
           <div class="menu-inner-shadow"></div>
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active">
-              <a href="index.php" class="menu-link">
+              <a href="index.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">품목 및 시세 비교하기</div>
               </a>
@@ -92,7 +97,7 @@
             <!-- Forms -->
             <li class="menu-item">
               <a
-                href="https://www.hongik.ac.kr/index.do"
+                href="https://kadx.co.kr/"
                 target="_blank"
                 class="menu-link"
               >
@@ -102,7 +107,7 @@
             </li>
             <li class="menu-item">
               <a
-                href="http://software.hongik.ac.kr/home/"
+                href="https://kadx.co.kr/"
                 target="_blank"
                 class="menu-link"
               >
@@ -130,6 +135,12 @@
             </li>
           </ul>
         </aside>
+
+
+
+
+
+
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -150,10 +161,7 @@
               <!-- 홈페이지 이름 -->
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
-                  <img src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/1437b234-02cc-4109-9c9d-ed9a0155c5b1" alt class="w-px-40 h-auto " />
-                  <svg width="25" viewBox="0 0 25 42"></svg>
-                  <span class="app-brand-text demo text-body fw-bolder">농수산물 거래 플랫폼</span>
-                  <svg width="25" viewBox="0 0 25 42"></svg>
+                  <span class="app-brand-text demo menu-text fw-bolder ms-2">농수산물 거래 플랫폼</span>
                 </div>
               </div>
               <!-- 홈페이지 이름 부분 -->
@@ -169,14 +177,14 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/6fbf151f-a1e3-4a8a-be28-6b44a1d0110f" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="account-settings.php">
+                      <a class="dropdown-item" href="#"> <!--여기에서 구매내역 연결 하이퍼링크 추가-->
                         <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">내 정보</span>
+                        <span class="align-middle">My Profile</span>
                       </a>
                     </li>
                     <li>
@@ -203,28 +211,102 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
-                <div class="col-lg-12 mb-4 order-0">
+                <div class="col-lg-8 mb-4 order-0">
                   <div class="card">
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
-                        
                         <div class="card-body">
                           <h5 class="card-title text-primary">최근 플랫폼에서 거래된 내역 🎉</h5>
-                          <?php
-                            include 'recent_transactions.php';
-                          ?>
+                          <p class="mb-4">
+                            php에서 db 접근하여서 거래 테이블 상위 3개정도 불러와서 <br>
+                            일시 / 품목 / 상점이름 / 거래 가격 표로 출력<br>
+                            아마 거래 발생 이후 새로고침하면 최신화 되는 방식 구현 희망 
+          
+                          </p>
 
                         </div>
                       </div>
-                      <div class="col-sm-4 text-center text-sm-left">
+                      <div class="col-sm-5 text-center text-sm-left">
                         <div class="card-body pb-0 px-0 px-md-4">
                           <img
-                            src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/6cabe344-3f9c-4616-872b-5a0a88b1d31e"
+                            src="../assets/img/illustrations/man-with-laptop-light.png"
                             height="140"
                             alt="View Badge User"
                             data-app-dark-img="illustrations/man-with-laptop-dark.png"
                             data-app-light-img="illustrations/man-with-laptop-light.png"
                           />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 order-1">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="../assets/img/icons/unicons/chart-success.png"
+                                alt="chart success"
+                                class="rounded"
+                              />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt3"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="fw-semibold d-block mb-1">%%%%</span>
+                          <h3 class="card-title mb-2">$%%%%</h3>
+                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> %%%0%</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="../assets/img/icons/unicons/wallet-info.png"
+                                alt="Credit Card"
+                                class="rounded"
+                              />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt6"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span>#@#@</span>
+                          <h3 class="card-title text-nowrap mb-1">$*&&%</h3>
+                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> !!!!!%</small>
                         </div>
                       </div>
                     </div>
@@ -301,7 +383,69 @@
                 <!--/ Total Revenue -->
                 <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
                   <div class="row">
-                    
+                    <div class="col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img src="../assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt4"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="d-block mb-1">***</span>
+                          <h3 class="card-title text-nowrap mb-2">****</h3>
+                          <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> ****</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt1"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="cardOpt1">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="fw-semibold d-block mb-1">기능 구현</span>
+                          <h3 class="card-title mb-2">######</h3>
+                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> !!!!</small>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- </div>
+    <div class="row"> -->
+                   
                   </div>
                 </div>
               </div>
@@ -312,8 +456,8 @@
                   <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between pb-0">
                       <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">해당 상품의 평균 가격</h5>
-                        <small class="text-muted">상품 조회를 클릭하시면 조회됩니다.</small>
+                        <h5 class="m-0 me-2">평균 가격 구현해야할 부분</h5>
+                        <small class="text-muted">설명 부분</small>
                       </div>
                     </div>
                     <div class="card-body">
