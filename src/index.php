@@ -3,7 +3,7 @@
   session_start(); // 세션 시작
 
   // 사용자가 로그인되어 있는지 확인
-  if (!isset($_SESSION['userid'])) {
+  if (!isset($_SESSION['user_id'])) {
       // 로그인되어 있지 않다면 로그인 페이지로 리다이렉트
       header("Location: auth-login-basic.php");
       exit();
@@ -231,7 +231,7 @@
                   </div>
                 </div>
                 <!-- Total Revenue -->
-                <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+                <div class="col-14 col-lg-12 order-0 order-md-3 order-lg-2 mb-4">
                   <div class="card">
                     <div class="row row-bordered g-0">
                       <div class="col-md-8">
@@ -262,35 +262,78 @@
                                 aria-haspopup="true"
                                 aria-expanded="false"
                               >
-                                품목
+                              <span id="selectedItemName">품목</span>
                               </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                <a class="dropdown-item" href="javascript:void(0);">귤</a>
-                                <a class="dropdown-item" href="javascript:void(0);">사과</a>
-                                <a class="dropdown-item" href="javascript:void(0);">배</a>
+                              
+                              <form method="post" id="myForm">
+                                <input type="hidden" id="selectedValue" name="selectedValue">
+                              </form>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId" style="max-height: 200px; overflow-y: auto;">
+                                <a class="dropdown-item" onclick="setSelectedValue(1,'귤')">귤</a>
+                                <a class="dropdown-item" onclick="setSelectedValue(2,'사과')">사과</a>
+                                <a class="dropdown-item" onclick="setSelectedValue(3, '포도')">포도</a>
+                                <a class="dropdown-item" onclick="setSelectedValue(4,'감자')">감자</a>
+                                <a class="dropdown-item" onclick="setSelectedValue(5,'배추')">배추</a>
+                                <a class="dropdown-item" onclick="setSelectedValue(6,'양파')">양파</a>
+                                <a class="dropdown-item" onclick="setSelectedValue(7,'갈치')">갈치</a>
+                                <a class="dropdown-item" onclick="setSelectedValue(8,'고등어')">고등어</a>
+                                <a class="dropdown-item" onclick="setSelectedValue(9,'닭고기')">닭고기</a>
+                                <a class="dropdown-item" onclick="setSelectedValue(10,'돼지고기')">돼지고기</a>
                               </div>
-                            </div>
+                              <button class="btn btn-sm btn-primary" onclick="submitForm()">조회</button>
+                              <script>
+                                function setSelectedValue(value, itemName,imageURL) {
+                                  document.getElementById('selectedValue').value = value;
+                                  document.getElementById('selectedItemName').innerText = itemName;
+                                 
+                                  var imageSrc='';
+                                  switch(value){
+                                    case 1:
+                                      imageSrc='https://github-production-user-asset-6210df.s3.amazonaws.com/112881296/284073042-b9f772c1-f765-4e7b-834b-23a28d143b7f.png'
+                                      break;
+                                    case 2:
+                                      imageSrc='https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/f4bc4296-598d-4506-a5e4-e0b6fb9f230d'
+                                      break;
+                                    case 3:
+                                      imageSrc='https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/e472ea68-cd1a-432e-b61f-b0b526580269'
+                                      break;
+                                    case 4:
+                                      imageSrc='https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/64285521-8acc-4484-b534-51d91ba2aa80'
+                                      break;
+                                    case 5:
+                                      imageSrc='https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/9246436c-a133-431f-8fb1-7c8eae4dbcef'
+                                      break;
+                                    case 6:
+                                      imageSrc='https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/676db317-9d0d-49f2-978b-bf3f71068599'
+                                      break;
+                                    case 7:
+                                      imageSrc='https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/1c80aef9-6b6a-449c-9089-64a02c40dd53'
+                                      break;
+                                    case 8:
+                                      imageSrc='https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/71dc2f6d-b956-4007-a786-361cdb99ebb2'
+                                      break;
+                                    case 9:
+                                      imageSrc='https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/94ca6cc1-4796-4450-9725-c290ec70c9ef'
+                                      break;
+                                    case 10:
+                                      imageSrc='https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/5603c510-6c72-4305-9dca-10a58bc6c46b'
+                                      break;
+                                  }
+
+                                  document.getElementById('itemImage').src = imageSrc;
+                                  document.getElementById('selectedItemImage').style.display = 'block';
+                                }
+                                function submitForm(){
+                                  document.getElementById('myForm').submit();
+                                }
+                              </script>
+                              </div>
                           </div>
                         </div>
-                        <div id="growthChart"></div>
-                        <div class="text-center fw-semibold pt-3 mb-2">품목 선정 이후 품목 리스트 추가,  <br>
-                          이미지 품목에 맞춰서<br> 이미지 하이퍼링크 걸고 품목 선택시 이미지 표시 </div>
-
-                        <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                          <div class="d-flex">
-                            <div class="me-2">
-                              
-                            </div>
-                            <div class="d-flex flex-column">
-                              
-                            </div>
-                          </div>
-                          <div class="d-flex">
-                            <div class="me-2">
-                              
-                            </div>
-                            <div class="d-flex flex-column">
-                              
+                        <div class="card-body">
+                          <div class="text-center fw-semibold pt-3 mb-2">
+                            <div id="selectedItemImage" style="display: none;">
+                              <img id="itemImage" alt="Selected Item Image">
                             </div>
                           </div>
                         </div>
@@ -299,11 +342,6 @@
                   </div>
                 </div>
                 <!--/ Total Revenue -->
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                  <div class="row">
-                    
-                  </div>
-                </div>
               </div>
               <div class="row">
                 <!-- Order Statistics -->
@@ -376,5 +414,8 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </body>
 </html>

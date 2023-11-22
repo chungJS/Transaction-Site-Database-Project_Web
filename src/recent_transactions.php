@@ -2,30 +2,27 @@
 session_start();
 
 // 세션에서 사용자 ID 등의 정보를 가져오기
-if (isset($_SESSION['userid'])) {
-    $userid = $_SESSION['userid'];
-    
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
     // Oracle DB 연결 정보
     $oracle_username = "S3_501";
-    $oracle_password = "____";
+    $oracle_password = "pw1234";
     $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 
     // Oracle DB 연결
-    $oracle_conn = oci_connect($oracle_username, $oracle_password, $oracle_db,"UTF8");
+    $oracle_conn = oci_connect($oracle_username, $oracle_password, $oracle_db,'UTF8');
 
     // Oracle DB 연결 여부 확인
     if (!$oracle_conn) {
-        // 연결 실패시 JavaScript를 사용하여 팝업 표시
+        // 연결 실패시 JavaScript를 사용하여 팝업 표시 WHERE Users.user_id = '$user_id'
         echo '<script type="text/javascript">alert("Oracle DB 연결 실패");</script>';
     } else {
-        $query = "SELECT Users.user_name, Shops.shop_name, Products.product_name, Transactions.purchase_date, Transactions.purchase_price
+        $query = "SELECT *
                   FROM Transactions
                   JOIN Users ON Transactions.user_id = Users.user_id
                   JOIN Shops ON Transactions.shop_id = Shops.shop_id
-                  JOIN Products ON Transactions.product_id = Products.product_id
-                  WHERE Users.user_id = '$userid' 
-                  ORDER BY Transactions.purchase_date DESC
-                  FETCH FIRST 3 ROWS ONLY";
+                  JOIN Products ON Transactions.product_id = Products.product_id";
 
         $stmt = oci_parse($oracle_conn, $query);
         oci_execute($stmt);

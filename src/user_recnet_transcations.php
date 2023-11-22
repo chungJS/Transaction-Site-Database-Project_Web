@@ -2,12 +2,14 @@
 session_start();
 
 // 세션에서 사용자 ID 등의 정보를 가져오기
-if (isset($_SESSION['userid'])) {
-    $userid = $_SESSION['userid'];
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $str_without_spaces = str_replace(' ', '', $user_id);
+    echo $str_without_spaces;
 
     // Oracle DB 연결 정보
     $oracle_username = "S3_501";
-    $oracle_password = "____";
+    $oracle_password = "pw1234";
     $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 
     // Oracle DB 연결
@@ -15,15 +17,16 @@ if (isset($_SESSION['userid'])) {
 
     // Oracle DB 연결 여부 확인
     if (!$oracle_conn) {
-        // 연결 실패시 JavaScript를 사용하여 팝업 표시
+        // 연결 실패시 JavaScript를 사용하여 팝업 표시 WHERE Users.user_id = '$user_id'
         echo '<script type="text/javascript">alert("Oracle DB 연결 실패");</script>';
     } else {
-        $query = "SELECT Users.user_name, Shops.shop_name, Products.product_name, Transactions.purchase_date, Transactions.purchase_price
+        $query = "SELECT *
                   FROM Transactions
                   JOIN Users ON Transactions.user_id = Users.user_id
                   JOIN Shops ON Transactions.shop_id = Shops.shop_id
                   JOIN Products ON Transactions.product_id = Products.product_id
-                  WHERE Users.user_id = '$userid'";
+                  WHERE Users.user_id = '$user_id'";
+                  
 
         $stmt = oci_parse($oracle_conn, $query);
         oci_execute($stmt);
@@ -31,14 +34,16 @@ if (isset($_SESSION['userid'])) {
         echo "<style>
                 table {
                     border-collapse: collapse;
-                    width: 120%;
+                    width: 100%;
                     text-align: center;
+                    margin: 20px 0;
+                    font-size: 16px;
                 }
 
                 th, td {
                     border: 1px solid #dddddd;
-                    text-align: left;
-                    padding: 8px;
+                    text-align: center;
+                    padding: 10px;
                 }
 
                 th {
@@ -46,7 +51,7 @@ if (isset($_SESSION['userid'])) {
                 }
             </style>";
 
-        echo "<table border='1' style='border-collapse: collapse; width: 120%;'>
+        echo "<table border='1' style='border-collapse: collapse; width: 90%;'>
                 <thead>
                     <tr style='background-color: #f2f2f2;'>
                         <th>사용자</th>

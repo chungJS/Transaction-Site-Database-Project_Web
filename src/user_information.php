@@ -2,16 +2,16 @@
 session_start();
 
 // 세션에서 사용자 ID 등의 정보를 가져오기
-if (isset($_SESSION['userid'])) {
-    $userid = $_SESSION['userid'];
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
 
     // Oracle DB 연결 정보
-    $oracle_username = "S3_501";
+    $oracle_user_name = "S3_501";
     $oracle_password = "pw1234";
     $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 
     // Oracle DB 연결
-    $oracle_conn = oci_connect($oracle_username, $oracle_password, $oracle_db,'UTF8');
+    $oracle_conn = oci_connect($oracle_user_name, $oracle_password, $oracle_db,'UTF8');
 
     // Oracle DB 연결 여부 확인
     if (!$oracle_conn) {
@@ -19,7 +19,7 @@ if (isset($_SESSION['userid'])) {
         echo '<script type="text/javascript">alert("Oracle DB 연결 실패");</script>';
         } else {
         // 연결 성공시 쿼리 실행
-            $query = "SELECT * FROM Users WHERE Users.userid = '$userid'";
+            $query = "SELECT * FROM Users WHERE Users.user_id = '$user_id'";
             
             $stmt = oci_parse($oracle_conn, $query);
             oci_execute($stmt);
@@ -27,15 +27,15 @@ if (isset($_SESSION['userid'])) {
             $row = oci_fetch_assoc($stmt);
             // 팝업으로 결과 표시
             if ($row) {
-            $userName = $row['USERNAME'];
-            $userPhoneNumber = $row['USERPHONE'];
-            $userEmail = $row['USEREMAIL'];
-            $userCity = $row['USERCITY'];
+            $user_Name = $row['USER_NAME'];
+            $user_PhoneNumber = $row['USER_PHONE'];
+            $user_Email = $row['USER_EMAIL'];
+            $user_City = $row['USER_CITY'];
             $user_created_date = $row['CREATED_DATE'];
     
             echo '<style>
                 table {
-                    width: 50%;
+                    width: 100%;
                     border-collapse: collapse;
                     margin: 20px 0;
                     font-size: 16px;
@@ -53,13 +53,12 @@ if (isset($_SESSION['userid'])) {
             </style>';
 
             echo '<table>';
-            echo '<tr><th>User Name</th><th>Phone Number</th><th>E-mail</th><th>City</th><th>Created Date</th></tr>';
+            echo '<tr><th>User Name</th><th>Phone Number</th><th>E-mail</th><th>City</th></tr>';
             echo '<tr>';
-            echo '<td>' . $userName . '</td>';
-            echo '<td>' . $userPhoneNumber . '</td>';
-            echo '<td>' . $userEmail . '</td>';
-            echo '<td>' . $userCity . '</td>';
-            echo '<td>' . $user_created_date . '</td>';
+            echo '<td>' . $user_Name . '</td>';
+            echo '<td>' . $user_PhoneNumber . '</td>';
+            echo '<td>' . $user_Email . '</td>';
+            echo '<td>' . $user_City . '</td>';
             echo '</tr>';
             echo '</table>';
             

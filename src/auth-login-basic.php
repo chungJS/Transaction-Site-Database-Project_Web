@@ -73,15 +73,15 @@
 
               <form id="formAuthentication" class="mb-3" action="db-login.php" method="POST">
                 <div class="mb-3">
-                  <label for="userid" class="form-label">아이디</label>
-                  <input type="text" class="form-control" id="userid" name="userid" placeholder="아이디를 입력해주세요" autofocus required/>
+                  <label for="user_id" class="form-label">아이디</label>
+                  <input type="text" class="form-control" id="user_id" name="user_id" placeholder="아이디를 입력해주세요" autofocus required/>
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
-                    <label class="form-label" for="userpassword">비밀번호</label>
+                    <label class="form-label" for="user_password">비밀번호</label>
                   </div>
                   <div class="input-group input-group-merge">
-                    <input type="password" id="userpassword" class="form-control" name="userpassword"  />
+                    <input type="password" id="user_password" class="form-control" name="user_password"  />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>

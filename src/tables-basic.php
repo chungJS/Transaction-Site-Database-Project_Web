@@ -1,15 +1,5 @@
 <!DOCTYPE html>
-<?php
-  session_start(); // 세션 시작
 
-  // 사용자가 로그인되어 있는지 확인
-  if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-  }else{
-    header("Location: auth-login-basic.php");
-    exit();
-  }
-?>
 <!-- beautify ignore:start -->
 <html
   lang="en"
@@ -26,7 +16,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Account Information - Database Team 2</title>
+    <title> 팀 구성원 - Database Team 2</title>
 
     <meta name="description" content="" />
 
@@ -49,6 +39,17 @@
     <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/css/demo.css" />
 
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../assets/js/config.js"></script>
   </head>
 
   <body>
@@ -58,18 +59,25 @@
         <!-- Menu -->
 
 
+
+
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="index.php" class="app-brand-link">
-              <img src="../assets/img/avatars/hongik.jpg" alt class="w-px-40 h-auto " />
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">TEAM 2</span>
+              <img src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/eae17f03-cab2-4615-9917-b2709521b6cd" alt class="w-px-40 h-auto " />
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">TEAM 2</span> <!--대문자 찾기-->
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
+
           <div class="menu-inner-shadow"></div>
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="index.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">품목 및 시세 비교하기</div>
@@ -95,7 +103,7 @@
             <!-- Forms -->
             <li class="menu-item">
               <a
-              href="https://www.hongik.ac.kr/index.do"
+                href="https://kadx.co.kr/"
                 target="_blank"
                 class="menu-link"
               >
@@ -105,7 +113,7 @@
             </li>
             <li class="menu-item">
               <a
-              href="http://software.hongik.ac.kr/home/"
+                href="https://kadx.co.kr/"
                 target="_blank"
                 class="menu-link"
               >
@@ -125,7 +133,7 @@
             </li>
 
             <!-- Tables -->
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="tables-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">Members</div>
@@ -133,7 +141,11 @@
             </li>
           </ul>
         </aside>
+
+
+
         <!-- / Menu -->
+
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
@@ -152,13 +164,13 @@
               <!-- 홈페이지 이름 -->
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
-                  <img src="../assets/img/favicon.png" alt class="w-px-40 h-auto " />
+                  <img src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/1437b234-02cc-4109-9c9d-ed9a0155c5b1" alt class="w-px-40 h-auto " />
                   <svg width="25" viewBox="0 0 25 42"></svg>
                   <span class="app-brand-text demo text-body fw-bolder">농수산물 거래 플랫폼</span>
                   <svg width="25" viewBox="0 0 25 42"></svg>
                 </div>
               </div>
-              <!-- 홈페이지 이름 부분 -->
+              <!-- 홈페이지 -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
@@ -167,6 +179,7 @@
                   >
                 </li>
 
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -178,14 +191,14 @@
                     <li>
                       <a class="dropdown-item" href="account-settings.php">
                         <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">내 정보</span>
+                        <span class="align-middle">My Profile</span>
                       </a>
                     </li>
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="auth-login-basic.php">
+                      <a class="dropdown-item" href="">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
@@ -204,123 +217,108 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Information /</span> My Account</h4>
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Our Team 2/</span> Members</h4>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="card mb-4">
-                    <h5 class="card-header">Profile Details</h5>
-                    <!-- Account -->
-                    <div class="card-body">
-                      <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img
-                          src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/6fbf151f-a1e3-4a8a-be28-6b44a1d0110f"
-                          alt="user-avatar"
-                          class="d-block rounded"
-                          height="100"
-                          width="100"
-                          id="uploadedAvatar"
-                        />
-                        <div>
-                        <?php
-                          include "user_information.php";
-                          ?>
-                        </div>
-
-                      </div>
-                    </div>
-                    <hr class="my-0" />
-                    <div class="card-body">
-                      <form id="formAccountSettings" method="POST" action="update_user.php" style="display: none;">
-                        <div class="row">
-
-                        <div class="mb-3 col-md-6">
-                            <label for="user_name" class="form-label">이름</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="name"
-                              name="user_name"
-                              value=""
-                              autofocus required
-                            />
-                          </div>
-
-                          <div class="mb-3 col-md-6">
-                            <label for="user_email" class="form-label">이메일</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="email"
-                              name="user_email"
-                              value=""
-                              placeholder="database@db.com"
-                              autofocus required
-                            />
-                          </div>
-                          
-                          <div class="mb-3 col-md-6">
-                            <label class="form-label" for="user_phone">전화번호</label>
-                            <div class="input-group input-group-merge">
-                              <input
-                                type="text"
-                                id="phoneNumber"
-                                name="user_phone"
-                                class="form-control"
-                                placeholder="010-xxxx-xxxx"
-                                autofocus required
-                              />
+              <!-- Basic Bootstrap Table -->
+              <div class="card">
+                <h5 class="card-header">Contribute</h5>
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>담당 업무</th>
+                        <th>이름</th>
+                        <th>학번</th>
+                        <th>역할</th>
+                        <th>Contact</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      <tr>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>프로젝트 총괄</strong></td>
+                        <td>강보찬</td>
+                        <td>B989001</td>
+                        <td><span class="badge bg-label-primary me-1">팀장</span></td>
+                        <td>
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="https://github.com/WellshCorgi"
+                                ><i class="bx bx-edit-alt me-1"></i> Github</a
+                              >
+                              <a class="dropdown-item">Email : kbochani@g.hongik.ac.kr</a>
                             </div>
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="user_city" class="form-label">거주 지역</label>
-                            <input class="form-control" type="text" id="address" name="user_city" placeholder="ex) 서울" autofocus required />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>물품 가격 비교 구현 담당</strong></td>
+                        <td>정준석</td>
+                        <td>B889061</td>
+                        <td><span class="badge bg-label-success me-1">팀원</span></td>
+                        <td>
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="https://github.com/dpan0883"
+                                ><i class="bx bx-edit-alt me-1"></i> Github</a
+                              >
+                              <a class="dropdown-item">Email : B889061@g.hongik.ac.kr</a>
+                            </div>
                           </div>
-                        </div>
-                        <div class="mt-2 text-center" >
-                          <button type="submit" class="btn btn-primary me-2">변경 사항 저장</button>
-                          <button id="cancelButton" type="reset" class="btn btn-outline-secondary">취소</button>
-                        </div>
-                        <script>
-                        </script>
-                      </form>
-                    </div>
-                    <button id="editButton" type="submit" class="btn btn-primary me-2">정보 수정하기</button>
-
-                    <script>
-                      const editButton = document.querySelector("#editButton");
-                      const cancelButton = document.querySelector("#cancelButton");
-                      const formAccountSettings = document.querySelector("#formAccountSettings");
-
-                      editButton.addEventListener("click", function() {
-                        if(formAccountSettings.style.display == "none"){
-                          formAccountSettings.style.display = "block";
-                        }else{
-                          formAccountSettings.style.display = "none";
-                        }  
-                      });
-                      cancelButton.addEventListener("click", function() {
-                        // 모든 입력 필드의 값을 빈 문자열로 설정하여 지우기(초기화)
-                        const inputFields = formAccountSettings.querySelectorAll("input");
-                        inputFields.forEach(function(input) {
-                          input.value = "";
-                        });
-                      });
-                    </script>
-                    <!-- /Account -->
-                  </div>
-                  <div class="card">
-                    <h5 class="card-header">고객님의 농수산물 거래 내역</h5>
-                    <div class="card-body">
-                      <div class="mb-3 col-12 mb-0">
-                        <?php
-                          include 'user_recnet_transcations.php';
-                        ?>
-                      </div>
-                    </div>
-                  </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>로그인 및 회원가입 기능 담당</strong></td>
+                        <td>최원석</td>
+                        <td>B889
+                        </td>
+                        <td><span class="badge bg-label-success me-1">팀원</span></td>
+                        <td>
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="javascript:void(0);"
+                                ><i class="bx bx-edit-alt me-1"></i> Github</a
+                              >
+                              <a class="dropdown-item">Email : 888@g.hongik.ac.kr</a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>물품 선택 기능 담당</strong>
+                        </td>
+                        <td>박지원</td>
+                        <td>C189</td>
+                        <td><span class="badge bg-label-success me-1">팀원</span></td>
+                        <td>
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="javascript:void(0);"
+                                ><i class="bx bx-edit-alt me-1"></i> Github</a
+                              >
+                              <a class="dropdown-item">Email : 888@g.hongik.ac.kr</a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
+             
+
             </div>
             <!-- / Content -->
 
@@ -329,9 +327,7 @@
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
                   ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
+                  <script>document.write(new Date().getFullYear());</script>
                   , made by Hongik.university "DataBase and exercise" Team 2 Project.
                 </div>
               </div>
@@ -350,7 +346,6 @@
     </div>
     <!-- / Layout wrapper -->
 
-
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
@@ -361,12 +356,8 @@
     <script src="../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
-    <!-- Vendors JS -->
 
     <!-- Main JS -->
     <script src="../assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="../assets/js/pages-account-settings-account.js"></script>
   </body>
 </html>
