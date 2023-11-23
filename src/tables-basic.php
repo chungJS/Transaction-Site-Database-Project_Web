@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<!-- beautify ignore:start -->
+<?php
+?>
 <html
   lang="en"
   class="light-style layout-menu-fixed"

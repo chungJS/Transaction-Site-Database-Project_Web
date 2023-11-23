@@ -31,7 +31,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/1437b234-02cc-4109-9c9d-ed9a0155c5b1" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -61,7 +61,7 @@
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="index.php" class="app-brand-link">
-              <img src="../assets/img/avatars/hongik.jpg" alt class="w-px-40 h-auto " />
+              <img src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/eae17f03-cab2-4615-9917-b2709521b6cd" alt class="w-px-40 h-auto " />
               <span class="app-brand-text demo menu-text fw-bolder ms-2">TEAM 2</span>
             </a>
           </div>
@@ -126,7 +126,7 @@
 
             <!-- Tables -->
             <li class="menu-item">
-              <a href="tables-basic.html" class="menu-link">
+              <a href="tables-basic.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">Members</div>
               </a>
@@ -152,7 +152,7 @@
               <!-- 홈페이지 이름 -->
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
-                  <img src="../assets/img/favicon.png" alt class="w-px-40 h-auto " />
+                  <img src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/1437b234-02cc-4109-9c9d-ed9a0155c5b1" alt class="w-px-40 h-auto " />
                   <svg width="25" viewBox="0 0 25 42"></svg>
                   <span class="app-brand-text demo text-body fw-bolder">농수산물 거래 플랫폼</span>
                   <svg width="25" viewBox="0 0 25 42"></svg>
