@@ -4,11 +4,9 @@ session_start();
 // 세션에서 사용자 ID 등의 정보를 가져오기
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $str_without_spaces = str_replace(' ', '', $user_id);
-    echo $str_without_spaces;
 
     // Oracle DB 연결 정보
-    $oracle_username = "S3_501";
+    $oracle_username = "*";
     $oracle_password = "*";
     $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 

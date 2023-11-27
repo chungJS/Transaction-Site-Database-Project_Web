@@ -8,7 +8,7 @@ if (isset($_SESSION['user_id'])) {
     $user_email = $_POST['user_email'];
     $user_city = $_POST['user_city'];
 
-    $oracle_username = "S3_501";
+    $oracle_username = "*";
     $oracle_password = "*";
     $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 

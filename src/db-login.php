@@ -10,7 +10,7 @@ $encrypted_password = null;
 $wu = 0;
 $wp = 0;
 
-$oracle_username = "S3_501";
+$oracle_username = "*";
 $oracle_password = "*";
 $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 

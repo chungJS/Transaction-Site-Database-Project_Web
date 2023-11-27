@@ -46,6 +46,7 @@
     <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/css/demo.css" />
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
 
   <body>
@@ -123,7 +124,7 @@
 
             <!-- Tables -->
             <li class="menu-item">
-              <a href="tables-basic.php" class="menu-link">
+              <a href="tables-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">Members</div>
               </a>
@@ -222,8 +223,8 @@
                             src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/6cabe344-3f9c-4616-872b-5a0a88b1d31e"
                             height="140"
                             alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png"
+                            data-app-dark-img="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/52153fe8-b89b-4256-8b3c-4bde3f03f022"
+                            data-app-light-img="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/52153fe8-b89b-4256-8b3c-4bde3f03f022"
                           />
                         </div>
                       </div>
@@ -239,15 +240,11 @@
                         <hr>
                         <div id="totalRevenueChart" class="px-2"></div>
                         <div class="text-center">
-                          <div>
-                            <p>
-                              여기다가 물건 가격 테이블 접근하여서 상품별 상점들의 가격 출력
-                            </p>
+                          <div id="result">
+                            <?php
+                              include 'display-prices.php';
+                            ?>
                           </div>
-                          <form onsubmit="return false">
-                            <button class="btn btn-outline-primary" type="button">Buy Now</button>
-                          </form>
-                          
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -265,9 +262,6 @@
                               <span id="selectedItemName">품목</span>
                               </button>
                               
-                              <form method="post" id="myForm">
-                                <input type="hidden" id="selectedValue" name="selectedValue">
-                              </form>
                               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId" style="max-height: 200px; overflow-y: auto;">
                                 <a class="dropdown-item" onclick="setSelectedValue(1,'귤')">귤</a>
                                 <a class="dropdown-item" onclick="setSelectedValue(2,'사과')">사과</a>
@@ -280,12 +274,22 @@
                                 <a class="dropdown-item" onclick="setSelectedValue(9,'닭고기')">닭고기</a>
                                 <a class="dropdown-item" onclick="setSelectedValue(10,'돼지고기')">돼지고기</a>
                               </div>
-                              <button class="btn btn-sm btn-primary" onclick="submitForm()">조회</button>
+
+                              <form id="category" method="POST"  action="search-price.php">
+                                <input type="hidden" id="selectedValue" name="selectedValue">
+                                <input type="hidden" id="selectedItemNameback" name="selectedItemNameback">
+                                <button class="btn btn-sm btn-primary" id="search" type="submit" onclick="submitForm()">조회</button>
+                              </form>
+                              
+
                               <script>
                                 function setSelectedValue(value, itemName,imageURL) {
                                   document.getElementById('selectedValue').value = value;
                                   document.getElementById('selectedItemName').innerText = itemName;
-                                 
+                                  document.getElementById('selectedItemNameback').value = itemName;
+                                  
+
+                                  //기본 이미지 설정 후 클릭시에 해당 이미지 변경
                                   var imageSrc='';
                                   switch(value){
                                     case 1:
@@ -321,19 +325,20 @@
                                   }
 
                                   document.getElementById('itemImage').src = imageSrc;
-                                  document.getElementById('selectedItemImage').style.display = 'block';
+
                                 }
-                                function submitForm(){
-                                  document.getElementById('myForm').submit();
+                                function submitForm() {
+                                    document.getElementById('category').submit();
                                 }
+
                               </script>
                               </div>
                           </div>
                         </div>
                         <div class="card-body">
                           <div class="text-center fw-semibold pt-3 mb-2">
-                            <div id="selectedItemImage" style="display: none;">
-                              <img id="itemImage" alt="Selected Item Image">
+                            <div id="selectedItemImage" style="display: inline-block;">
+                              <img id="itemImage" alt="Selected Item Image" src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/aea8a760-d1ae-4282-96cf-5105c52c4040" alt="Default Image" style="display: block; max-width: 100%; height: auto;">
                             </div>
                           </div>
                         </div>
@@ -342,27 +347,22 @@
                   </div>
                 </div>
                 <!--/ Total Revenue -->
-              </div>
-              <div class="row">
-                <!-- Order Statistics -->
-                <div class="col-md-12 col-lg-8 col-xl-4 order-2 mb-4">
+                <div class="col-7 col-lg-5 order-0 order-md-3 order-lg-2 mb-4">
                   
                   <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                      <div class="card-title mb-0">
+                      <div class="col-md-8">
                         <h5 class="m-0 me-2">해당 상품의 평균 가격</h5>
-                        <small class="text-muted">상품 조회를 클릭하시면 조회됩니다.</small>
                       </div>
                     </div>
+                    <hr>
                     <div class="card-body">
-                      
-              
+                    <?php
+                      include 'display-avg-price.php';
+                    ?>
                     </div>
                   </div>
                 </div>
-                <!--/ Order Statistics -->
-
-            
               </div>
             </div>
             <!-- / Content -->
@@ -403,9 +403,6 @@
     <script src="../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
-    <!-- Vendors JS 그래프 부분 -->
-    <!--script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script--> 
-
     <!-- Main JS -->
     <script src="../assets/js/main.js"></script>
 
@@ -414,7 +411,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </body>

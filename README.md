@@ -3,6 +3,7 @@
 # Log in & create account 기능
 <img width="1470" alt="스크린샷 2023-11-22 오후 11 50 59" src="https://github.com/WellshCorgi/Transaction-Site-Database-Project/assets/112881296/65e4c6b9-dbb4-486a-a80f-9f0ddafb1b59">
 
+### 작동 파일
 - db-login.php    
 - logout.php  
 - auth-login-basic.php         
@@ -25,6 +26,7 @@
 # My Account Information [ 유저 개인 정보 수정 기능 & 거래 내역 조회 ]
 <img width="1470" alt="스크린샷 2023-11-22 오후 11 51 28" src="https://github.com/WellshCorgi/Transaction-Site-Database-Project/assets/112881296/05948e2f-78df-4009-8657-1651d762ee5c">
 
+### 작동 파일
 - account-settings.php
 - user_information.php
 - user_recnet_transcations.php
@@ -44,7 +46,8 @@
 - tables-basic.php 
 
  
-## 메인 홈페이지
+# 메인 홈페이지
+### 작동 파일
 - index.php
 - recent_transactions.php    
 - 상품 조회 후, 물건 선택후 구매하기 기능.php (구현예정)

@@ -18,8 +18,8 @@ $wu = 0;
 $wp = 0;
 $checkcounter = 0;
 
-$oracle_username = "S3_501";
-$oracle_password = "pw1234";
+$oracle_username = "*";
+$oracle_password = "*";
 $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 
 $conn = oci_connect($oracle_username, $oracle_password, $oracle_db,'UTF8');
