@@ -11,7 +11,7 @@ $wu = 0;
 $wp = 0;
 
 $oracle_username = "S3_501";
-$oracle_password = "pw1234";
+$oracle_password = "__";
 $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 
 if (!is_null($user_id)) {
