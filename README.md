@@ -43,15 +43,29 @@
 
 <br><br><br> 
 # 팀 프로젝트 구성원 소개 페이지
+<img width="1196" alt="스크린샷 2023-11-29 오전 10 25 31" src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/8147a17a-679f-4955-afa2-323c90ef8016">
+
 - tables-basic.php 
 
  
 # 메인 홈페이지
+<img width="1470" alt="스크린샷 2023-11-29 오전 10 17 25" src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/d5e85e2d-c45b-4760-b6e8-14d640b9f948">
+
+## 도소매 시세가격 정보
+<img width="559" alt="스크린샷 2023-11-29 오전 10 17 35" src="https://github.com/DataBase-501-Group2-Project-2023/.github/assets/112881296/b509ece5-9703-4acf-98c2-77cda753460e">
+
 ### 작동 파일
 - index.php
-- recent_transactions.php    
-- 상품 조회 후, 물건 선택후 구매하기 기능.php (구현예정)
+- recent_transactions.php  
+- search-price.php
+- display-prices.php  
+- display-avg-price.php
+- purchase-product.php
 
 ### 작동 흐름
 1. index.php 접속 / 세션 유효 확인
 2. recent_transactions.php 를 통해 최근 거래 상단 3개 불러오기
+3. 품목 선택 하고 조회하기 / search-price.php 품목 세션 유지 및 쿼리 진행
+4. 조회 된 품목에 대한 상품 좌측에 표시 display-prices.php & 구매 버튼 활성화
+5. 하단에 한국농수산물거래소 평균가격 출력 / display-avg-price.php
+6. 구매 시 purchase-product.php 활성화 / 구매한 품목 물건 테이블에서 삭제
