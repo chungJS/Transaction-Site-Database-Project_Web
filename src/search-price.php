@@ -6,8 +6,8 @@ if (isset($_SESSION['user_id'])) {
     $selectedValue = $_POST['selectedValue'];
     $selectedItemName = $_POST['selectedItemNameback'];
 
-    $oracle_username = "*";
-    $oracle_password = "*";
+    $oracle_username = "S3_501";
+    $oracle_password = "pw1234";
     $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 
     $oracle_conn = oci_connect($oracle_username, $oracle_password, $oracle_db,'UTF8');
@@ -74,7 +74,9 @@ if (isset($_SESSION['user_id'])) {
                 echo "품목 가격 정보 로딩 오류: " . $error['message'];
             }
         }else{
-            echo "<h2>제품을 먼저 선택해주세요.</h2>";
+            echo '<script type="text/javascript">alert("조회된 물건 없음");</script>';
+            echo "<script type='text/javascript'>location.href='index.php'</script>";
+            
         }
         oci_close($oracle_conn);
     }

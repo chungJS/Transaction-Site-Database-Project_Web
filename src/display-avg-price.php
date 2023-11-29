@@ -4,8 +4,8 @@ if (isset($_SESSION['product_ids'])) {
     $product_ids = $_SESSION['product_ids'];
     $selectedItemName = $_SESSION['selectedItemName'];
 
-    $oracle_username = "*";
-    $oracle_password = "*";
+    $oracle_username = "S3_501";
+    $oracle_password = "pw1234";
     $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 
     $oracle_conn = oci_connect($oracle_username, $oracle_password, $oracle_db, 'UTF8');

@@ -4,32 +4,34 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
+        $selected_name = $_SESSION['selectedItemName'];
     
         if (isset($_POST['selectedProduct'])) {
-            // 선택한 product_id와 shop_id를 가져옴
             list($selectedProductId, $selectedShopId, $purchase_price) = explode('|', $_POST['selectedProduct']);
         } else {
-            // 필요한 데이터가 포함되지 않은 경우 처리
             echo "잘못된 접근입니다! 물건값 누락!";
         }
         // 현재 날짜 및 시간으로 설정
         $purchase_date = date('d-M-Y'); 
 
-        $oracle_username = "*";
-        $oracle_password = "*";
+        $oracle_username = "S3_501";
+        $oracle_password = "pw1234";
         $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 
         $oracle_conn = oci_connect($oracle_username, $oracle_password, $oracle_db,'UTF8');
         if ($oracle_conn) {
-            $sql = "INSERT INTO Transactions
-                    VALUES (:user_id, :shop_id, :product_id, TO_DATE(:purchase_date, 'DD-MON-YY'), :purchase_price)";
+            $sql = "INSERT INTO Transactions (user_id, shop_id, product_id, purchase_date, purchase_price, product_name)
+                    VALUES (:user_id, :shop_id, :product_id, TO_DATE(:purchase_date, 'DD-MON-YY'), :purchase_price,:product_name)";
             $stmt = oci_parse($oracle_conn, $sql);
             oci_bind_by_name($stmt, ':user_id', $user_id);
             oci_bind_by_name($stmt, ':shop_id', $selectedShopId);
             oci_bind_by_name($stmt, ':product_id', $selectedProductId);
             oci_bind_by_name($stmt, ':purchase_date', $purchase_date);
             oci_bind_by_name($stmt, ':purchase_price', $purchase_price);
+            oci_bind_by_name($stmt, ':product_name', $selected_name);
             $result = oci_execute($stmt);
+
+            oci_commit($oracle_conn);
             if ($result) {
                 // 성공시 물품 테이블에서 구매된 물품 삭제
                 $deleteSQL = "DELETE FROM AverageProductPrices WHERE product_id = :product_id";
@@ -37,10 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 oci_bind_by_name($deletestmt, ':product_id', $selectedProductId);
                 $deleteResult = oci_execute($deletestmt);
 
+                oci_commit($oracle_conn);
+
                 $delete2SQL = "DELETE FROM Products WHERE product_id = :product_id";
                 $delete2stmt = oci_parse($oracle_conn, $delete2SQL);
                 oci_bind_by_name($delete2stmt, ':product_id', $selectedProductId);
                 $delete2Result = oci_execute($delete2stmt);
+
 
                 oci_commit($oracle_conn);
 

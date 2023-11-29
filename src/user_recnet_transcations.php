@@ -6,8 +6,8 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
     // Oracle DB 연결 정보
-    $oracle_username = "*";
-    $oracle_password = "*";
+    $oracle_username = "S3_501";
+    $oracle_password = "pw1234";
     $oracle_db = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=203.249.87.57)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))";
 
     // Oracle DB 연결
@@ -18,11 +18,10 @@ if (isset($_SESSION['user_id'])) {
         // 연결 실패시 JavaScript를 사용하여 팝업 표시 WHERE Users.user_id = '$user_id'
         echo '<script type="text/javascript">alert("Oracle DB 연결 실패");</script>';
     } else {
-        $query = "SELECT *
+        $query = "SELECT USER_NAME,SHOP_NAME,PRODUCT_NAME,PURCHASE_DATE,PURCHASE_PRICE
                   FROM Transactions
                   JOIN Users ON Transactions.user_id = Users.user_id
                   JOIN Shops ON Transactions.shop_id = Shops.shop_id
-                  JOIN Products ON Transactions.product_id = Products.product_id
                   WHERE Users.user_id = '$user_id'";
                   
 

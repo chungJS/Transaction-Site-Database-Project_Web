@@ -154,8 +154,9 @@
                 <div class="nav-item d-flex align-items-center">
                   <img src="../assets/img/favicon.png" alt class="w-px-40 h-auto " />
                   <svg width="25" viewBox="0 0 25 42"></svg>
+                  <a href="index.php">
                   <span class="app-brand-text demo text-body fw-bolder">농수산물 거래 플랫폼</span>
-                  <svg width="25" viewBox="0 0 25 42"></svg>
+                  <svg width="25" viewBox="0 0 40 42"></svg>
                 </div>
               </div>
               <!-- 홈페이지 이름 부분 -->
